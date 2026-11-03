@@ -58,7 +58,7 @@
 <section class="lang-block" id="hu" lang="hu">
 <h1>Adatkezelési tájékoztató</h1>
 <p class="sub">A Miriad belső alkalmazásai: <strong>Miriad AdPilot</strong>, <strong>Miriad Inbox</strong> és <strong>Miriad Google Ads AI</strong></p>
-<p class="sub">Hatályos: 2026. október 19.</p>
+<p class="sub">Hatályos: 2026. november 3.</p>
 
 <h2>1. Ki kezeli az adatot?</h2>
 <div class="box">
@@ -123,9 +123,9 @@
 <div class="box">
   <p><strong>Amit nem kérünk le és nem tárolunk:</strong> profilkép, nem, nyelv, időzóna, valódi e-mail-cím. A Meta által a beszélgetéshez adott álcímet (…@facebook.com) eldobjuk.</p>
 </div>
-<p><strong>Válasz:</strong> a hozzáférés lehetővé teszi, hogy a megkeresésre a Meta szabályai szerinti 24 órás ablakon belül válaszoljunk; ilyen funkció ma nincs bekapcsolva. Ha bevezetjük, csak egy munkatárs jóváhagyásával küld. Kéretlen üzenetet az alkalmazás nem küld.</p>
+<p><strong>Válasz:</strong> a megkeresésre a megbízó ügyfélszolgálati rendszeréből, a Meta szabályai szerinti 24 órás ablakon belül lehet válaszolni. Minden válasz egy munkatárs kifejezett jóváhagyása után megy ki, és csak egy meglévő beszélgetésbe. Kéretlen üzenetet az alkalmazás nem küld.</p>
 <p>A használt Meta-jogosultságok: <code>pages_messaging</code>, <code>pages_manage_metadata</code>, <code>pages_read_engagement</code>, <code>pages_show_list</code>, <code>instagram_basic</code>, <code>instagram_manage_messages</code>.</p>
-<p><strong>A hozzáférés módja:</strong> külön gépi felhasználó, saját hozzáférési kulccsal, szerver–szerver kapcsolaton; a kulcs nem kerül a felhős futtatóra. Facebook-bejelentkezés nincs.</p>
+<p><strong>A hozzáférés módja:</strong> külön gépi felhasználó, saját hozzáférési kulccsal, szerver–szerver kapcsolaton. A kulcsot a Miriad titok-tárolója (Infisical) őrzi; a Miriad központi futtatója (GitHub Actions) titkosított titokként kapja meg, és csak az üzenetek lekérése vagy egy jóváhagyott válasz küldése idejére használja. A megbízó ügyfélszolgálati rendszerébe a kulcs nem kerül. Facebook-bejelentkezés nincs.</p>
 
 <h2>4. Mire használjuk, és milyen jogalapon?</h2>
 <p><strong>Cél:</strong> a hirdetések teljesítményének elemzése, riportok készítése, a kampányok tervezésének és optimalizálásának támogatása, a szokatlan változások (például hirtelen költés- vagy eredmény-változás) jelzése, valamint a hirdetések és a termékkatalógus kezelése a fiók tulajdonosának megbízásából; továbbá a hirdetésekhez érkező hozzászólások feldolgozása termékfejlesztési és szolgáltatásfejlesztési céllal; a Miriad Inbox esetén a megbízóinkhoz érkező üzenetek kezelése (ügyfélszolgálat, a megkeresés rendeléshez kötése) és az alkotókkal (influencerekkel) folytatott együttműködés nyilvántartása.</p>
@@ -138,14 +138,15 @@
 <ul>
   <li><strong>A Miriad saját számítógépein</strong> — helyi adatbázisban.</li>
   <li><strong>Supabase</strong> — adatbázis az EU-ban (Írország); a Miriad belső riport-felülete innen olvas.</li>
-  <li><strong>GitHub Actions</strong> — a napi, automatikus adatbetöltés futtatója; az adat csak áthalad rajta.</li>
+  <li><strong>Supabase</strong> — a megbízó ügyfélszolgálati rendszerének adatbázisa az Egyesült Királyságban (London); itt tárolódnak a Miriad Inbox üzenetei.</li>
+  <li><strong>GitHub Actions</strong> — a napi, automatikus adatbetöltés, a Miriad Inbox üzenet-lekérésének és a jóváhagyott válaszok küldésének futtatója; az adat csak áthalad rajta.</li>
   <li><strong>Infisical</strong> — titok-tároló az EU-ban; kizárólag a hozzáférési kulcsokat őrzi, hirdetési adatot nem.</li>
   <li><strong>Anthropic (Claude)</strong> — elemzéskor mesterséges intelligencián alapuló asszisztens dolgozza fel az adatot.</li>
   <li><strong>Discord</strong> — belső értesítések összesített mutatókkal (például „a heti költés 30%-kal nőtt”).</li>
 </ul>
-<p>Az adathoz a Miriad munkatársai férnek hozzá, a munkájukhoz szükséges mértékben. A hozzáférési kulcsok nem kerülnek a programkódba; a Meta felé a kérés fejlécében utaznak, nem a webcímben. Az írásra jogosító kulcs nem kerül a felhős futtatóra, csak a Miriad saját gépén használható.</p>
-<p>A Miriad Inbox üzeneteit ma tartósan nem tároljuk: a feldolgozás a memóriában történik, legfeljebb egy csak a Miriad gépén olvasható, ideiglenes munkafájlba kerülnek. Ha tartós tárolást (például ügyfélszolgálati rendszert) vezetünk be, annak helyét és megőrzési idejét előtte ezen az oldalon közzétesszük.</p>
-<p>Az EU-n kívüli (egyesült államokbeli) szolgáltatók — GitHub, Anthropic, Discord — esetén az adattovábbítás a GDPR V. fejezete szerinti garanciákkal történik: az EU–USA adatvédelmi keretrendszer alapján, ha a szolgáltató abban tanúsított, egyébként az Európai Bizottság által elfogadott általános szerződési feltételek alapján.</p>
+<p>Az adathoz a Miriad munkatársai férnek hozzá, a munkájukhoz szükséges mértékben. A hozzáférési kulcsok nem kerülnek a programkódba; a Meta felé a kérés fejlécében utaznak, nem a webcímben. Az írásra jogosító kulcsok — a Miriad Inbox kulcsának kivételével (lásd a 3.3 pontot) — nem kerülnek a felhős futtatóra, csak a Miriad saját gépén használhatók.</p>
+<p>A Miriad Inbox üzeneteit a megbízó ügyfélszolgálati rendszerében tároljuk, amelynek adatbázisa a Supabase-nél, az Egyesült Királyságban (London) van. Az üzenetek lekérése a Miriad központi futtatóján (GitHub Actions) fut; a futás közben keletkező ideiglenes adat a futás végén a futtató gépével együtt törlődik. Az üzeneteket a megbízó ügyfélszolgálati munkatársai bejelentkezés után, a munkájukhoz szükséges mértékben látják. Ha a Miriad saját gépén dolgozunk fel üzenetet, az legfeljebb egy csak ott olvasható, ideiglenes munkafájlba kerül.</p>
+<p>Az EU-n kívüli (egyesült államokbeli) szolgáltatók — GitHub, Anthropic, Discord — esetén az adattovábbítás a GDPR V. fejezete szerinti garanciákkal történik: az EU–USA adatvédelmi keretrendszer alapján, ha a szolgáltató abban tanúsított, egyébként az Európai Bizottság által elfogadott általános szerződési feltételek alapján. Az Egyesült Királyságba (a Supabase londoni adatbázisa) az adattovábbítás az Európai Bizottság megfelelőségi határozata alapján történik (GDPR 45. cikk).</p>
 
 <h2>6. Kinek adjuk ki?</h2>
 <p>Az adatot nem adjuk el, nem adjuk bérbe, és nem osztjuk meg hirdetési vagy adatkereskedelmi célból. Harmadik fél csak így kaphat belőle:</p>
@@ -159,7 +160,7 @@
 <ul>
   <li><strong>Teljesítmény- és tartalomadat:</strong> a hirdetési fiók kezelésének idejére, utána legfeljebb 12 hónapig; ezt követően töröljük vagy anonimizáljuk.</li>
   <li><strong>Hozzászólások:</strong> a lekéréstől számított 180 napig; ezt követően töröljük.</li>
-  <li><strong>Üzenetek (Miriad Inbox):</strong> tartós tárolás ma nincs; az ideiglenes munkafájlt legkésőbb 30 nap után töröljük.</li>
+  <li><strong>Üzenetek (Miriad Inbox):</strong> az üzeneteket és a beszélgetések adatait (a partner nevét és azonosítóját) az üzenet időpontjától számított 10 évig őrizzük, utána automatikusan töröljük; a titkosított mentésekben további legfeljebb 12 hónapig maradhatnak. A Miriad saját gépén készült ideiglenes munkafájlt legkésőbb 30 nap után töröljük.</li>
   <li><strong>Hozzáférési kulcs:</strong> a visszavonásáig; visszavonás vagy csere után haladéktalanul töröljük.</li>
 </ul>
 
@@ -185,7 +186,7 @@
 <section class="lang-block" id="en" lang="en">
 <h1>Privacy Policy</h1>
 <p class="sub">Miriad's internal apps: <strong>Miriad AdPilot</strong>, <strong>Miriad Inbox</strong> and <strong>Miriad Google Ads AI</strong></p>
-<p class="sub">Effective: 19 October 2026</p>
+<p class="sub">Effective: 3 November 2026</p>
 
 <h2>1. Who is the controller?</h2>
 <div class="box">
@@ -250,9 +251,9 @@
 <div class="box">
   <p><strong>What we do not request or store:</strong> profile picture, gender, language, time zone, real e-mail address. The relay address (…@facebook.com) that Meta provides for a conversation is discarded.</p>
 </div>
-<p><strong>Replies:</strong> the access allows replying to an inquiry within Meta's 24-hour window; no such feature is switched on today. If we introduce it, it sends only with a team member's approval. The app does not send unsolicited messages.</p>
+<p><strong>Replies:</strong> inquiries can be answered from the client's customer-service system within Meta's 24-hour window. Every reply is sent only after a team member's explicit approval, and only into an existing conversation. The app does not send unsolicited messages.</p>
 <p>Meta permissions used: <code>pages_messaging</code>, <code>pages_manage_metadata</code>, <code>pages_read_engagement</code>, <code>pages_show_list</code>, <code>instagram_basic</code>, <code>instagram_manage_messages</code>.</p>
-<p><strong>How access works:</strong> a separate system user with its own access token, over a server-to-server connection; the token is not placed on the cloud runner. There is no Facebook Login.</p>
+<p><strong>How access works:</strong> a separate system user with its own access token, over a server-to-server connection. The token is kept in Miriad's secrets vault (Infisical); Miriad's central runner (GitHub Actions) receives it as an encrypted secret and uses it only while fetching messages or sending an approved reply. The token is not placed in the client's customer-service system. There is no Facebook Login.</p>
 
 <h2>4. Purpose and legal basis</h2>
 <p><strong>Purpose:</strong> analysing ad performance, reporting, supporting campaign planning and optimisation, flagging unusual changes (for example a sudden change in spend or results), and managing ads and product catalogs on behalf of the account owner; and processing comments on our ads for product development and service development; for Miriad Inbox, handling messages sent to our clients (customer service, linking an inquiry to an order) and keeping a record of collaborations with creators (influencers).</p>
@@ -265,14 +266,15 @@
 <ul>
   <li><strong>Miriad's own computers</strong> — in a local database.</li>
   <li><strong>Supabase</strong> — database in the EU (Ireland); Miriad's internal reporting dashboard reads from it.</li>
-  <li><strong>GitHub Actions</strong> — runs the automated daily data load; data only passes through it.</li>
+  <li><strong>Supabase</strong> — the database of the client's customer-service system in the United Kingdom (London); Miriad Inbox messages are stored here.</li>
+  <li><strong>GitHub Actions</strong> — runs the automated daily data load, the Miriad Inbox message fetch and the sending of approved replies; data only passes through it.</li>
   <li><strong>Infisical</strong> — secrets vault in the EU; stores access tokens only, no advertising data.</li>
   <li><strong>Anthropic (Claude)</strong> — an AI assistant processes the data during analysis.</li>
   <li><strong>Discord</strong> — internal notifications with aggregated metrics (for example “weekly spend up 30%”).</li>
 </ul>
-<p>Data is accessed by Miriad team members to the extent their work requires. Access tokens are never stored in program code; they are sent to Meta in the request header, not in the URL. The token that allows writing is not placed on the cloud runner and can be used only on Miriad's own computer.</p>
-<p>Miriad Inbox messages are not stored permanently today: they are processed in memory and at most written to a temporary working file readable only on Miriad's computer. Before we introduce permanent storage (for example a customer-service system), we will publish its location and retention period on this page.</p>
-<p>Where a provider outside the EU (in the United States) is involved — GitHub, Anthropic, Discord — transfers are made with safeguards under Chapter V of the GDPR: under the EU–U.S. Data Privacy Framework where the provider is certified, otherwise under the Standard Contractual Clauses adopted by the European Commission.</p>
+<p>Data is accessed by Miriad team members to the extent their work requires. Access tokens are never stored in program code; they are sent to Meta in the request header, not in the URL. Tokens that allow writing — except the Miriad Inbox token (see section 3.3) — are not placed on the cloud runner and can be used only on Miriad's own computer.</p>
+<p>Miriad Inbox messages are stored in the client's customer-service system, whose database is hosted by Supabase in the United Kingdom (London). Messages are fetched on Miriad's central runner (GitHub Actions); temporary data created during a run is deleted together with the runner machine at the end of the run. The client's customer-service staff see the messages after signing in, to the extent their work requires. If we process a message on Miriad's own computer, it is at most written to a temporary working file readable only there.</p>
+<p>Where a provider outside the EU (in the United States) is involved — GitHub, Anthropic, Discord — transfers are made with safeguards under Chapter V of the GDPR: under the EU–U.S. Data Privacy Framework where the provider is certified, otherwise under the Standard Contractual Clauses adopted by the European Commission. Transfers to the United Kingdom (Supabase's London database) are based on the European Commission's adequacy decision (GDPR Art. 45).</p>
 
 <h2>6. Who do we share data with?</h2>
 <p>We do not sell or rent the data, and we do not share it for advertising or data-brokerage purposes. A third party may receive it only as follows:</p>
@@ -286,7 +288,7 @@
 <ul>
   <li><strong>Performance and content data:</strong> for as long as we manage the ad account, then for at most 12 months; after that it is deleted or anonymised.</li>
   <li><strong>Comments:</strong> for 180 days from retrieval; deleted afterwards.</li>
-  <li><strong>Messages (Miriad Inbox):</strong> no permanent storage today; the temporary working file is deleted within 30 days at the latest.</li>
+  <li><strong>Messages (Miriad Inbox):</strong> messages and conversation data (the partner's name and ID) are kept for 10 years from the time of the message, then deleted automatically; they may remain in encrypted backups for up to 12 more months. A temporary working file created on Miriad's own computer is deleted within 30 days at the latest.</li>
   <li><strong>Access tokens:</strong> until revoked; deleted immediately after revocation or replacement.</li>
 </ul>
 
